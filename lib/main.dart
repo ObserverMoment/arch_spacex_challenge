@@ -1,6 +1,6 @@
+import 'package:arch_x_spacex/modules/timeline/timeline_view.dart';
 import 'package:arch_x_spacex/services_manager.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,14 +17,14 @@ class _MyAppState extends State<MyApp> {
   late ServicesManager _servicesManager;
   @override
   void initState() {
-    _servicesManager = ServicesManager(GetIt.instance);
+    _servicesManager = const ServicesManager();
     _servicesManager.registerGlobalServices();
     super.initState();
   }
 
   @override
   void dispose() {
-    // TODO: implement dispose
+    _servicesManager.unregisterGlobalServices();
     super.dispose();
   }
 
@@ -36,16 +36,7 @@ class _MyAppState extends State<MyApp> {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const Home(),
+      home: const TimelineView(),
     );
-  }
-}
-
-class Home extends StatelessWidget {
-  const Home({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }

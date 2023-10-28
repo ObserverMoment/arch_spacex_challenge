@@ -1,33 +1,45 @@
-import 'package:arch_x_spacex/data/dio_client.dart';
-import 'package:arch_x_spacex/data/spacex/spacex_api_client.dart';
+import 'package:arch_x_spacex/constants.dart';
+import 'package:arch_x_spacex/data/spacex_api/spacex_api_launches.dart';
 import 'package:arch_x_spacex/repo/launches_repo.dart';
+import 'package:chopper/chopper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
-import 'package:logger/logger.dart';
+import 'package:logger/logger.dart' as l;
+
+final services = GetIt.instance;
 
 class ServicesManager {
-  final GetIt services;
-  const ServicesManager(this.services);
+  const ServicesManager();
 
-  /// Pre Auth
   void registerGlobalServices() {
-    final logger = Logger();
+    final logger = l.Logger();
+    services.registerSingleton<l.Logger>(logger);
 
     FlutterError.onError = (details) {
-      logger.log(Level.all, details.exceptionAsString(),
+      logger.log(l.Level.all, details.exceptionAsString(),
           stackTrace: details.stack, error: details.exception);
     };
 
-    final dio = DioClient(logger);
-    final spacexApiClient = SpacexApiClient(dio.client);
+    final chopper = ChopperClient(
+        baseUrl: Uri.https(kSpacexApiBaseUrl, '/v4'),
+        services: [
+          // Create and pass an instance of the generated service to the client
+          LaunchesListService.create()
+        ],
+        interceptors: [
+          const HeadersInterceptor({'Content-type': 'Application/json'}),
+          HttpLoggingInterceptor()
+        ],
+        converter: const JsonConverter());
 
-    /// Register global services needed pre-auth ///
-    /// Global services with no dependencies ///
-    services.registerLazySingleton<LaunchesRepo>(
-        () => LaunchesRepo(spacexApiClient));
+    services.registerSingleton<ChopperClient>(chopper);
+
+    services.registerLazySingleton<LaunchesRepo>(() => LaunchesRepo(chopper));
   }
 
   void unregisterGlobalServices() {
     services.unregister<LaunchesRepo>();
+    services.unregister<ChopperClient>();
+    services.unregister<l.Logger>();
   }
 }

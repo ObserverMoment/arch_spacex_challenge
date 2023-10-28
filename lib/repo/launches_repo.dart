@@ -1,29 +1,43 @@
-import 'package:arch_x_spacex/data/spacex/spacex_api_client.dart';
-import 'package:arch_x_spacex/data/spacex/spacex_api_model.dart';
+import 'package:arch_x_spacex/data/spacex_api/launches/launches_model.dart';
+import 'package:arch_x_spacex/data/spacex_api/launches/launches_service.dart';
+import 'package:arch_x_spacex/global_utils.dart';
+import 'package:chopper/chopper.dart';
 import 'package:dio/dio.dart';
 import 'package:rxdart/subjects.dart';
 
 class LaunchesRepo {
-  final SpacexApiClient spacexApiClient;
-  LaunchesRepo(this.spacexApiClient) {
+  late LaunchesListService _launchesListService;
+  LaunchesRepo(ChopperClient chopper) {
+    _launchesListService = chopper.getService<LaunchesListService>();
     _initData();
   }
 
-  /// Internal data.
-  List<Launch> _launches = [];
-
   final _launchesBehaviourSubject = BehaviorSubject<List<Launch>>.seeded([]);
-
   Stream<List<Launch>> get launches => _launchesBehaviourSubject.stream;
 
   _initData() async {
     try {
-      _launches = await spacexApiClient.getLaunches();
-      _launchesBehaviourSubject.add(_launches);
+      final res = await _launchesListService.getLaunches();
+
+      print('res');
+      print(res);
+
+      if (res.isSuccessful && res.body != null) {
+        _launchesBehaviourSubject.add(res.body ?? []);
+      } else {
+        printErrorLog('Errror retrieving Launches: ${res.error}');
+      }
     } on DioException catch (e) {
-      /// TODO.
+      printErrorLog(
+        'Errror retrieving Launches: ${e.message}',
+        time: DateTime.now(),
+        error: e.error,
+        stackTrace: e.stackTrace,
+      );
     } catch (e) {
-      /// TODO.
+      printErrorLog(
+        'Errror retrieving Launches: $e',
+      );
     }
   }
 }
