@@ -1,6 +1,6 @@
 import 'dart:async';
-import 'package:arch_x_spacex/data/spacex_api/launches/launches_model.dart';
-import 'package:arch_x_spacex/repo/launches_repo.dart';
+import 'package:arch_x_spacex/data/services/spacex_api/launches/launches_model.dart';
+import 'package:arch_x_spacex/data/repositories/launches_repo.dart';
 import 'package:arch_x_spacex/services_manager.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,8 +24,11 @@ class TimelineViewBloc extends Cubit<TimelineViewBlocState> {
   late StreamSubscription<List<Launch>> _launchesListener;
 
   TimelineViewBloc() : super(TimelineViewBlocState()) {
-    _launchesListener = _launchesRepo.launches
-        .listen((launches) => state.copyWith(launches: launches));
+    _launchesListener =
+        _launchesRepo.launches.listen((launches) => emit(state.copyWith(
+              launches: launches,
+              initialized: true,
+            )));
   }
 
   @override

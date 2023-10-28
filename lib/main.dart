@@ -1,5 +1,5 @@
-import 'package:arch_x_spacex/modules/timeline/timeline_view.dart';
 import 'package:arch_x_spacex/services_manager.dart';
+import 'package:arch_x_spacex/view_modules/timeline/timeline_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -32,9 +32,14 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'SpaceX - The Launches',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Colors.black,
+        appBarTheme:
+            const AppBarTheme(backgroundColor: Color.fromARGB(255, 18, 18, 18)),
+        cardTheme: CardTheme(
+            color: const Color.fromARGB(255, 47, 47, 47),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12))),
       ),
       home: const TimelineView(),
     );

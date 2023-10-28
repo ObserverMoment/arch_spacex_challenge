@@ -1,6 +1,6 @@
 import 'package:arch_x_spacex/constants.dart';
-import 'package:arch_x_spacex/data/spacex_api/spacex_api_launches.dart';
-import 'package:arch_x_spacex/repo/launches_repo.dart';
+import 'package:arch_x_spacex/data/repositories/launches_repo.dart';
+import 'package:arch_x_spacex/data/services/spacex_api/launches/launches_service.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
@@ -16,7 +16,7 @@ class ServicesManager {
     services.registerSingleton<l.Logger>(logger);
 
     FlutterError.onError = (details) {
-      logger.log(l.Level.all, details.exceptionAsString(),
+      logger.log(l.Level.error, details.exceptionAsString(),
           stackTrace: details.stack, error: details.exception);
     };
 

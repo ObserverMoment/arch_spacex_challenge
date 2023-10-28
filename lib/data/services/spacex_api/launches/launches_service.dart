@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:arch_x_spacex/data/spacex_api/launches/launches_model.dart';
+import 'package:arch_x_spacex/data/services/spacex_api/launches/launches_model.dart';
 import 'package:chopper/chopper.dart';
 
 part 'launches_service.chopper.dart';
