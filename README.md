@@ -23,21 +23,21 @@ Timeline style view of the history of SpaceX as seen through it's launches and m
 
 ## Suggested Features and Improvements
 ### Improvements
-    - Custom styled widgets for use globally. Currently no themeing.
-    - Investigate decoding json in isolates (if beneficial)
-    - Api call rety logic (Chopper "RetryInteceptor")
-    - Web / Desktop responsive design
-    - Implement full routing solution such as GoRouter or AutoRoute.
-    - MongoDB query API for call optimization (https://github.com/r-spacex/SpaceX-API/blob/master/docs/launches/v4/query.md)
-    - Network image loading state and failure state.
-    - Expanded widget, unit and integration testing.
-    - All dates from the api are UTC, we may need to convert to local time (if it matters)
+- Custom styled widgets for use globally. Currently no themeing.
+- Investigate decoding json in isolates (if beneficial)
+- Api call rety logic (Chopper "RetryInteceptor")
+- Web / Desktop responsive design
+- Implement full routing solution such as GoRouter or AutoRoute.
+- MongoDB query API for call optimization (https://github.com/r-spacex/SpaceX-API/blob/master/docs/launches/v4/query.md)
+- Network image loading state and failure state.
+- Expanded widget, unit and integration testing.
+- All dates from the api are UTC, we may need to convert to local time (if it matters)
 ### Features
-    - Sort the timeline list by date range.
-    - Filter the timeline by various (launch success, rocket name)
-    - Launch image gallery (view by launch or chronologically over time)
-    - Save favourite rockets and capsules.
-    - Add ideas 1 and 2!
+- Sort the timeline list by date range.
+- Filter the timeline by various (launch success, rocket name)
+- Launch image gallery (view by launch or chronologically over time)
+- Save favourite rockets and capsules.
+- Add ideas 1 and 2!
 
 ## Comments
 
