@@ -1,6 +1,6 @@
-import 'package:arch_x_spacex/constants.dart';
 import 'package:arch_x_spacex/data/repositories/launches_repo.dart';
-import 'package:arch_x_spacex/data/services/spacex_api/launches/launches_service.dart';
+import 'package:arch_x_spacex/data/repositories/rockets_repo.dart';
+import 'package:arch_x_spacex/data/services/spacex_api/chopper_factory.dart';
 import 'package:chopper/chopper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
@@ -20,24 +20,16 @@ class ServicesManager {
           stackTrace: details.stack, error: details.exception);
     };
 
-    final chopper = ChopperClient(
-        baseUrl: Uri.https(kSpacexApiBaseUrl, '/v4'),
-        services: [
-          // Create and pass an instance of the generated service to the client
-          LaunchesListService.create()
-        ],
-        interceptors: [
-          const HeadersInterceptor({'Content-type': 'Application/json'}),
-          HttpLoggingInterceptor()
-        ],
-        converter: const JsonConverter());
+    final chopper = ChopperFactory().create();
 
     services.registerSingleton<ChopperClient>(chopper);
 
     services.registerLazySingleton<LaunchesRepo>(() => LaunchesRepo(chopper));
+    services.registerLazySingleton<RocketsRepo>(() => RocketsRepo(chopper));
   }
 
   void unregisterGlobalServices() {
+    services.unregister<RocketsRepo>();
     services.unregister<LaunchesRepo>();
     services.unregister<ChopperClient>();
     services.unregister<l.Logger>();

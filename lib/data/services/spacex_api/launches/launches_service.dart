@@ -1,15 +1,15 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:arch_x_spacex/data/services/spacex_api/launches/launches_model.dart';
+import 'package:arch_x_spacex/data/services/spacex_api/launches/launch_model.dart';
 import 'package:chopper/chopper.dart';
 
 part 'launches_service.chopper.dart';
 
 @ChopperApi(baseUrl: "/launches")
-abstract class LaunchesListService extends ChopperService {
-  static LaunchesListService create([ChopperClient? client]) =>
-      _$LaunchesListService(client);
+abstract class LaunchesService extends ChopperService {
+  static LaunchesService create([ChopperClient? client]) =>
+      _$LaunchesService(client);
 
   @FactoryConverter(
     response: convertLaunchesResponse,

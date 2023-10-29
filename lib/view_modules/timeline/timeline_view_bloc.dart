@@ -1,35 +1,17 @@
 import 'dart:async';
-import 'package:arch_x_spacex/data/services/spacex_api/launches/launches_model.dart';
 import 'package:arch_x_spacex/data/repositories/launches_repo.dart';
-import 'package:arch_x_spacex/services_manager.dart';
-import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:arch_x_spacex/data/services/services_manager.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'timeline_view_bloc.g.dart';
-
-@CopyWith()
-class TimelineViewBlocState {
-  final List<Launch> launches;
-  final bool initialized;
-  final String? blocError;
-  TimelineViewBlocState({
-    this.initialized = false,
-    this.blocError,
-    this.launches = const [],
-  });
-}
-
-class TimelineViewBloc extends Cubit<TimelineViewBlocState> {
+class TimelineViewBloc extends Cubit<LaunchesRetrievedData?> {
   final _launchesRepo = services<LaunchesRepo>();
-  late StreamSubscription<List<Launch>> _launchesListener;
+  late StreamSubscription<LaunchesRetrievedData?> _launchesListener;
 
-  TimelineViewBloc() : super(TimelineViewBlocState()) {
-    _launchesListener =
-        _launchesRepo.launches.listen((launches) => emit(state.copyWith(
-              launches: launches,
-              initialized: true,
-            )));
+  TimelineViewBloc() : super(const LaunchesRetrievedData()) {
+    _launchesListener = _launchesRepo.launches.listen((data) => emit(data));
   }
+
+  void retryRequestData() => _launchesRepo.retrieveLaunchesData();
 
   @override
   Future<void> close() {

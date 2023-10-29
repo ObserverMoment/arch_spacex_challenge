@@ -1,4 +1,4 @@
-import 'package:arch_x_spacex/services_manager.dart';
+import 'package:arch_x_spacex/data/services/services_manager.dart';
 import 'package:arch_x_spacex/view_modules/timeline/timeline_view.dart';
 import 'package:flutter/material.dart';
 

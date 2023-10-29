@@ -1,12 +1,14 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'launches_model.g.dart';
+part 'launch_model.g.dart';
 
+// https://github.com/r-spacex/SpaceX-API/blob/master/docs/launches/v4/schema.md
 @JsonSerializable()
 class Launch {
   final String id;
   final String name;
   final int flightNumber;
+  final String? rocket;
   final DateTime dateUtc;
   final String? details;
 
@@ -19,6 +21,7 @@ class Launch {
     required this.id,
     required this.name,
     required this.flightNumber,
+    required this.rocket,
     required this.dateUtc,
     required this.details,
     this.patchImageUrl,
