@@ -77,10 +77,16 @@ class _LaunchListItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: spaceSiblingsEvenly([
-                      Text(
-                        '${launch.flightNumber}. ${launch.name}',
-                        style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              '${launch.flightNumber}. ${launch.name}',
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                          ),
+                        ],
                       ),
                       Text(launch.dateUtc.dateAndTime),
                       if (launch.details.notNullNotEmpty)
