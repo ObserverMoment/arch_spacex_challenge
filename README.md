@@ -19,7 +19,7 @@ Timeline style view of the history of SpaceX as seen through it's launches and m
 
  - Selected: Idea 3 (SpaceX - The History)
  - Reasoning: The main aim of the task was to provide a solid api client implementation for the SpaceX Api. Ideas 1 and 2 lean much more towards UX / UI complexity, with potentially most or all of the assigned time being used up with data vis or pure "design" work.
- - Priorities: Implement a solid api client with decent error handling, testing, reliability and scalability. Plus ensure separation the view and data logic within the architecture and folder structure.
+ - Priorities: Implement a solid api client with decent error handling, testing, reliability and scalability. Plus ensure separation of the view and data logic within the architecture and folder structure.
 
 ## Suggested Features and Improvements
 ### Improvements
@@ -37,6 +37,7 @@ Timeline style view of the history of SpaceX as seen through it's launches and m
     - Filter the timeline by various (launch success, rocket name)
     - Launch image gallery (view by launch or chronologically over time)
     - Save favourite rockets and capsules.
+    - Add ideas 1 and 2!
 
 ## Comments
 
