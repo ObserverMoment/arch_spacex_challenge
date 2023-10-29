@@ -30,7 +30,7 @@ Timeline style view of the history of SpaceX as seen through it's launches and m
 - Implement full routing solution such as GoRouter or AutoRoute.
 - MongoDB query API for call optimization (https://github.com/r-spacex/SpaceX-API/blob/master/docs/launches/v4/query.md)
 - Network image loading state and failure state.
-- Expanded widget, unit and integration testing.
+- Expanded widget, unit and integration testing. Explore Patrol (https://pub.dev/packages/patrol).
 - All dates from the api are UTC, we may need to convert to local time (if it matters)
 ### Features
 - Sort the timeline list by date range.
@@ -42,3 +42,5 @@ Timeline style view of the history of SpaceX as seen through it's launches and m
 ## Comments
 
 The vast majority of launches use the Falcon 9 rocket, making the Rocket Info -> Details page functionality somewhat redundant. This page should be updated to show info beyond just the rocket if it is to be useful.
+
+Build tested and working on iOS simulator and Android emulator.
