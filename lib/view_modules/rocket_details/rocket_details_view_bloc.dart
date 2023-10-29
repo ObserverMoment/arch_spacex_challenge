@@ -11,7 +11,7 @@ class RocketDetailsViewBloc extends Cubit<RocketRetrievedData?> {
   }
 
   void retrieveRocketDetails() async {
-    final data = await _rocketsRepo.getRocketDetails(rocketId);
+    final data = await _rocketsRepo.retrieveRocketDetails(rocketId);
     emit(data);
   }
 }

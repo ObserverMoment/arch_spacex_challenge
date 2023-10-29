@@ -15,7 +15,7 @@ class RocketsRepo {
     _rocketsService = chopper.getService<RocketsService>();
   }
 
-  Future<RocketRetrievedData> getRocketDetails(String rocketId) async {
+  Future<RocketRetrievedData> retrieveRocketDetails(String rocketId) async {
     try {
       final res = await _rocketsService.getRocket(rocketId);
       if (res.isSuccessful && res.body != null) {

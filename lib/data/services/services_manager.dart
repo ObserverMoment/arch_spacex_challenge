@@ -1,3 +1,4 @@
+import 'package:arch_x_spacex/data/repositories/history_repo.dart';
 import 'package:arch_x_spacex/data/repositories/launches_repo.dart';
 import 'package:arch_x_spacex/data/repositories/rockets_repo.dart';
 import 'package:arch_x_spacex/data/services/spacex_api/chopper_factory.dart';
@@ -24,14 +25,16 @@ class ServicesManager {
 
     services.registerSingleton<ChopperClient>(chopper);
 
+    services.registerLazySingleton<HistoryRepo>(() => HistoryRepo(chopper));
     services.registerLazySingleton<LaunchesRepo>(() => LaunchesRepo(chopper));
     services.registerLazySingleton<RocketsRepo>(() => RocketsRepo(chopper));
   }
 
   void unregisterGlobalServices() {
     services.unregister<RocketsRepo>();
-    services.unregister<LaunchesRepo>();
-    services.unregister<ChopperClient>();
-    services.unregister<l.Logger>();
+    services.unregister<LaunchesRepo>(disposingFunction: (o) => o.dispose());
+    services.unregister<HistoryRepo>(disposingFunction: (o) => o.dispose());
+    services.unregister<ChopperClient>(disposingFunction: (o) => o.dispose());
+    services.unregister<l.Logger>(disposingFunction: (o) => o.close());
   }
 }

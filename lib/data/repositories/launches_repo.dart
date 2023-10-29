@@ -23,7 +23,7 @@ class LaunchesRepo {
   Stream<LaunchesRetrievedData?> get launches =>
       _launchesBehaviourSubject.stream;
 
-  void retrieveLaunchesData() async {
+  Future<void> retrieveLaunchesData() async {
     try {
       final res = await _launchesService.getLaunches();
       if (res.isSuccessful && res.body != null) {
@@ -39,5 +39,9 @@ class LaunchesRepo {
       printErrorLog(err);
       _launchesBehaviourSubject.add(LaunchesRetrievedData(errors: [err]));
     }
+  }
+
+  void dispose() {
+    _launchesBehaviourSubject.close();
   }
 }
