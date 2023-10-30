@@ -24,6 +24,7 @@ Timeline style view of the history of SpaceX as seen through it's launches and m
 ## Suggested Features and Improvements
 ### Improvements
 - Custom styled widgets for use globally. Currently no themeing.
+- List pagination for timeline. (https://pub.dev/packages/infinite_scroll_pagination)
 - Investigate decoding json in isolates (if beneficial)
 - Api call rety logic (Chopper "RetryInteceptor")
 - Web / Desktop responsive design
